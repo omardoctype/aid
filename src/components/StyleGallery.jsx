@@ -1,9 +1,11 @@
 import { useLanguage } from '../i18n/LanguageContext'
+import cartoonStyleImage from '../assets/cartoon.png'
+import chibiStyleImage from '../assets/chiibi.png'
 
-const gradients = [
-  'from-brand-gold/45 via-brand-beige to-brand-olive/20',
-  'from-brand-olive/25 via-white to-brand-beige/80',
-]
+const resolveStyleImage = (styleTitle) => {
+  const normalizedTitle = String(styleTitle).toLowerCase()
+  return normalizedTitle.includes('cartoon') ? cartoonStyleImage : chibiStyleImage
+}
 
 function StyleGallery() {
   const { t } = useLanguage()
@@ -20,14 +22,16 @@ function StyleGallery() {
 
         <div className="mx-auto mt-8 grid max-w-5xl gap-4 md:grid-cols-2">
           {cards.map((style, index) => (
-            <article key={style.title} className="ui-card overflow-hidden p-0">
-              <div
-                className={`relative h-40 bg-gradient-to-br ${gradients[index % gradients.length]}`}
-                role="img"
-                aria-label={t('styles.cardAria', '').replace('{style}', style.title)}
-              >
-                <div className="absolute inset-4 rounded-2xl border border-white/65 bg-white/35 backdrop-blur-sm" />
-                <div className="absolute bottom-3 left-3 rounded-full border border-white/75 bg-white/70 px-3 py-1 text-xs font-semibold text-brand-dark-olive">
+            <article key={style.title} className="ui-card group overflow-hidden p-0">
+              <div className="relative h-56 overflow-hidden">
+                <img
+                  src={resolveStyleImage(style.title)}
+                  alt={t('styles.cardAria', '').replace('{style}', style.title)}
+                  className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+                  loading={index === 0 ? 'eager' : 'lazy'}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-brand-dark-olive/45 via-transparent to-transparent" />
+                <div className="absolute bottom-3 left-3 rounded-full border border-white/75 bg-white/80 px-3 py-1 text-xs font-semibold text-brand-dark-olive">
                   {t('styles.previewLabel')}
                 </div>
               </div>

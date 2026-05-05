@@ -1,4 +1,5 @@
 import { useLanguage } from '../i18n/LanguageContext'
+import BrandLogo from './BrandLogo'
 
 function Hero() {
   const { t } = useLanguage()
@@ -12,7 +13,10 @@ function Hero() {
           <div className="pointer-events-none absolute -right-10 bottom-4 h-40 w-40 rounded-full bg-brand-olive/15 blur-3xl" />
 
           <div className="relative">
-            <span className="ui-badge">{t('hero.badge')}</span>
+            <div className="flex items-center gap-3">
+              <BrandLogo className="h-12 w-12 sm:h-14 sm:w-14" alt={t('common.brand')} />
+              <span className="ui-badge">{t('hero.badge')}</span>
+            </div>
 
             <h1 className="mt-5 text-4xl sm:text-5xl lg:text-6xl">{t('hero.title')}</h1>
 

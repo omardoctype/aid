@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useLanguage } from '../i18n/LanguageContext'
+import BrandLogo from './BrandLogo'
 
 const navigation = [
   { key: 'home', href: '#accueil' },
@@ -28,10 +29,11 @@ function Header() {
         <div className="flex h-20 items-center justify-between gap-2 sm:gap-3">
           <a
             href="#accueil"
-            className="font-display text-2xl font-bold tracking-tight text-brand-dark-olive"
+            className="flex items-center gap-2.5 font-display text-2xl font-bold tracking-tight text-brand-dark-olive sm:gap-3"
             aria-label={t('common.brand')}
           >
-            {t('common.brand')}
+            <BrandLogo className="h-11 w-11 sm:h-12 sm:w-12" alt={t('common.brand')} />
+            <span>{t('common.brand')}</span>
           </a>
 
           <nav

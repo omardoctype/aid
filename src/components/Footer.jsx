@@ -1,4 +1,5 @@
 import { useLanguage } from '../i18n/LanguageContext'
+import BrandLogo from './BrandLogo'
 
 function Footer() {
   const { t } = useLanguage()
@@ -12,9 +13,12 @@ function Footer() {
       <div className="ui-container py-12 sm:py-14">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.2fr_1fr_1fr_1.1fr]">
           <section aria-labelledby="footer-brand">
-            <h2 id="footer-brand" className="text-3xl text-brand-cream">
-              {t('common.brand')}
-            </h2>
+            <div className="flex items-center gap-3">
+              <BrandLogo className="h-12 w-12 border-brand-gold/55" alt={t('common.brand')} />
+              <h2 id="footer-brand" className="text-3xl text-brand-cream">
+                {t('common.brand')}
+              </h2>
+            </div>
             <p className="mt-3 max-w-sm text-sm text-brand-cream/85 sm:text-base">{t('footer.tagline')}</p>
           </section>
 
