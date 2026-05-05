@@ -1,0 +1,468 @@
+export const translations = {
+  ar: {
+    common: {
+      brand: 'عيادي',
+      languageLabel: 'اللغة',
+      mainNavigation: 'القائمة الرئيسية',
+      mobileNavigation: 'قائمة الجوال',
+      openMenu: 'حلّ المنيو',
+      closeMenu: 'سكر المنيو',
+      langAr: 'عربي',
+      langFr: 'Français',
+      stepWord: 'مرحلة',
+      ctaOrderNow: 'اطلب توّة',
+      ctaSeeExamples: 'شوف أمثلة',
+      askOnWhatsApp: 'إسأل على WhatsApp',
+      notConfiguredWhatsApp: '+216 XX XXX XXX',
+      whatsapp: 'WhatsApp',
+      copyright: '© {year} عيادي. جميع الحقوق محفوظة.',
+    },
+    nav: {
+      home: 'الرئيسية',
+      howItWorks: 'كيفاش تخدم؟',
+      examples: 'أمثلة',
+      pricing: 'الأسوام',
+      order: 'اطلب توّة',
+    },
+    hero: {
+      badge: 'مجموعة عيد 1447 - عيادي',
+      title: 'حوّل تصويرة صغيرك لـ T-shirt عيد مميّز',
+      subtitle:
+        'ابعثلنا تصويرة ولدك ولا بنتك، نعملولك تصميم بالذكاء الاصطناعي مع خروف العيد، ونطبعوه على T-shirt بجودة عالية.',
+      note: 'خدمة معمولة للعائلات، سهلة في التليفون وتبان شيك على desktop.',
+      visualBadge: 'Aperçu',
+      visualTitle: 'من التصويرة حتى لـ T-shirt النهائي',
+      visualSummary: 'تصويرة + IA + خروف العيد + طباعة T-shirt',
+      visualSteps: ['تصويرة الصغير', 'تصميم IA', 'خروف العيد', 'طباعة T-shirt'],
+      visualAria:
+        'مخطط توضيحي فيه أربع مراحل: تصويرة الصغير، تصميم الذكاء الاصطناعي، خروف العيد، وبعدها طباعة التيشرت',
+      visualAsideAria: 'لمحة على مسار صناعة التصميم',
+    },
+    howItWorks: {
+      badge: 'كيفاش تخدم؟',
+      title: 'كيفاش تخدم الخدمة؟',
+      subtitle: 'الخطوات واضحة وساهلة باش تطلب بسرعة ومرتاح.',
+      steps: [
+        {
+          title: 'ابعث التصويرة',
+          description: 'حمّل تصويرة واضحة لصغيرك من الفورمولار.',
+        },
+        {
+          title: 'اختار الستايل',
+          description: 'اختار Chibi ولا Cartoon.',
+        },
+        {
+          title: 'نحضّرولك التصميم',
+          description: 'نعملولك تصميم IA فيه صغيرك مع خروف العيد.',
+        },
+        {
+          title: 'نطبعوه ونوصلوه',
+          description: 'بعد ما تأكّد، نطبعولك T-shirt ونحضّروه للتسليم.',
+        },
+      ],
+    },
+    styles: {
+      badge: 'أمثلة',
+      title: 'ستايلات تنجم تختار منهم',
+      subtitle: 'اختار بين زوز ستايلات واضحين ومناسبين للصغار.',
+      previewLabel: 'مثال ستايل',
+      cards: [
+        {
+          title: 'Chibi',
+          description: 'ستايل مزيان وبرشة cute، مناسب للصغار.',
+        },
+        {
+          title: 'Cartoon',
+          description: 'ستايل كرتوني فرحان ونظيف، يجي هايل على T-shirt العيد.',
+        },
+      ],
+      cardAria: 'أمثلة بصرية للستايل {style}',
+    },
+    pricing: {
+      badge: 'الأسوام',
+      title: 'الأسوام',
+      subtitle: 'باقات واضحة لصغير واحد',
+      description:
+        'اختار T-shirt واحد ولا زوج T-shirts بنفس التصميم IA متاع صغيرك مع خروف العيد.',
+      popular: 'أحسن عرض',
+      choosePack: 'اختار الباقة',
+      packs: [
+        {
+          name: 'Pack T-shirt واحد',
+          price: '40 د.ت',
+          benefits: [
+            'تصميم IA مخصص',
+            'T-shirt واحد للصغير',
+            'تصويرة صغيرك مع خروف العيد',
+            'تشوف التصميم قبل الطباعة',
+          ],
+        },
+        {
+          name: 'Pack زوج T-shirts',
+          price: '70 د.ت',
+          benefits: [
+            'نفس التصميم IA المخصص',
+            'زوج T-shirts للصغير',
+            'مناسب باش تخلي واحد احتياط',
+            'توفّر 10 دنانير',
+          ],
+          featured: true,
+        },
+      ],
+    },
+    whyChooseUs: {
+      badge: 'علاش عيادي؟',
+      title: 'خدمة على ثقة للوالدين',
+      subtitle: 'هدفنا نخرّجو ذكرى عيد مزيانة، آمنة، وجودتها عالية.',
+      items: [
+        {
+          title: 'تصميم مخصّص',
+          description: 'كل تصميم يتعمل على قياس تصويرة صغيرك والستايل اللي تختارو.',
+        },
+        {
+          title: 'طباعة بجودة',
+          description: 'نستعملو خامات مريحة وطباعة ثابتة وواضحة.',
+        },
+        {
+          title: 'خصوصية مصونة',
+          description: 'تصاور صغاركم تتعالج بسرية وما تتنشرش من غير موافقة.',
+        },
+      ],
+    },
+    privacy: {
+      badge: 'الخصوصية',
+      title: 'خصوصية تصاور الصغار',
+      text1:
+        'تصويرة صغيرك نستعملوها كان باش نعملولك التصميم متاع الطلبية. ما ننشرو حتى تصويرة من غير موافقتك.',
+      text2:
+        'كي تكمل الطلبية، المعطيات تبقى للاستعمال الخاص بالتأكيد والمتابعة كان، موش للنشر.',
+    },
+    form: {
+      badge: 'طلبية مخصّصة',
+      title: 'اطلب T-shirt عيادي',
+      subtitle:
+        'عمّر المعطيات متاعك وابعثلنا الطلب. نبعثولك التأكيد ونرجعولك عبر WhatsApp.',
+      labels: {
+        prenom: 'الاسم',
+        nom: 'اللقب',
+        telephone: 'رقم الهاتف',
+        adresse: 'عنوان التوصيل',
+        enfant: 'اسم الصغير',
+        age: 'عمر الصغير',
+        taille: 'قياس T-shirt',
+        couleur: 'لون T-shirt',
+        pack: 'الباقة',
+        style: 'ستايل التصميم',
+        message: 'شنوة تحب نكتبو على T-shirt؟',
+        photo: 'تصويرة الصغير',
+      },
+      placeholders: {
+        prenom: 'مثال: آمنة',
+        nom: 'مثال: بن صالح',
+        telephone: '+216 XX XXX XXX',
+        adresse: 'الحي، المدينة، الرمز البريدي',
+        enfant: 'مثال: آدم',
+        age: 'مثال: 7 سنين',
+        message: 'مثال: اكتب الاسم مع نجوم وخروف عيد فرحان.',
+      },
+      selects: {
+        sizePlaceholder: 'اختار القياس',
+        colorPlaceholder: 'اختار اللون',
+        packPlaceholder: 'اختار الباقة',
+        stylePlaceholder: 'اختار الستايل',
+      },
+      options: {
+        sizes: ['2 ans', '4 ans', '6 ans', '8 ans', '10 ans', '12 ans', 'S', 'M', 'L', 'XL'],
+        colors: ['أبيض', 'أسود', 'بيج'],
+        packs: ['Pack T-shirt واحد - 40 د.ت', 'Pack زوج T-shirts - 70 د.ت'],
+        styles: ['Chibi', 'Cartoon'],
+      },
+      consent:
+        'نوافق إنّ عيادي تستعمل التصويرة كان باش تعمل التصميم الخاص بالطلبية، وما تنشرهاش من غير موافقتي.',
+      submit: 'ابعث الطلبية',
+      loading: 'قاعدين نبعثو في الطلبية...',
+      success:
+        'طلبك تبعث بنجاح. باش نحضّرولك aperçu IA ونتصلو بيك على WhatsApp.',
+      whatsappConfirm: 'أكّد على WhatsApp',
+      photoHelp: 'الأنواع المسموح بها: JPG, JPEG, PNG, WEBP - الحجم الأقصى 5 MB.',
+      photoPreviewTitle: 'Aperçu التصويرة',
+      photoPreviewEmpty:
+        'ما اخترتش تصويرة بعد. حمّل تصويرة واضحة باش يظهرلك الـ aperçu هنا.',
+      configErrorPrefix: 'الإعدادات ناقصة. زيد المتغيّرات هاذم في .env:',
+      errors: {
+        required: 'الخانة هاذي لازمة.',
+        consentRequired: 'لازمك توافق على استعمال التصويرة قبل الإرسال.',
+        photoRequired: 'لازمك تزيد تصويرة.',
+        photoNotImage: 'الملف لازم يكون صورة.',
+        photoInvalidType: 'الأنواع المقبولة: JPG, JPEG, PNG, WEBP.',
+        photoTooLarge: 'حجم التصويرة لازم يكون أقل من 5 MB.',
+        validation: 'ثبت الخانات لي فيها خطأ قبل ما تكمّل.',
+        generic: 'صار مشكل. جرّب مرّة أخرى.',
+        cloudinary: 'صار مشكل وقت بعث التصويرة. جرّب مرّة أخرى.',
+        emailjs: 'صار مشكل وقت بعث الطلبية. جرّب مرّة أخرى.',
+      },
+      previewAria: 'Aperçu متاع التصويرة المرفوعة',
+      whatsappAria: 'أكّد الطلبية على WhatsApp',
+    },
+    whatsappMessage: {
+      intro: 'Bonjour, je veux confirmer ma commande عيادي 🐑👕',
+      nom: 'Nom',
+      prenom: 'Prénom',
+      telephone: 'Téléphone',
+      adresse: 'Adresse',
+      enfant: 'Nom enfant',
+      age: 'Âge',
+      taille: 'Taille T-shirt',
+      couleur: 'Couleur',
+      pack: 'Pack',
+      style: 'Style IA',
+      message: 'Message',
+      photo: 'Photo enfant',
+    },
+    footer: {
+      tagline: 'T-shirts عيد مخصّصة باش تخلي الفرحة ذكرى دائمة.',
+      linksTitle: 'روابط سريعة',
+      contactTitle: 'اتصل بينا',
+      familyTitle: 'للعايلة',
+      familyText:
+        'تجربة mobile-first، ستايل راقي، وحماية خصوصية تصاور صغاركم أولوية.',
+    },
+    floatingWhatsapp: {
+      label: 'اتصل بـ عيادي على WhatsApp',
+      text: 'WhatsApp',
+    },
+  },
+  fr: {
+    common: {
+      brand: 'عيادي',
+      languageLabel: 'Langue',
+      mainNavigation: 'Navigation principale',
+      mobileNavigation: 'Navigation mobile',
+      openMenu: 'Ouvrir le menu',
+      closeMenu: 'Fermer le menu',
+      langAr: 'عربي',
+      langFr: 'Français',
+      stepWord: 'Étape',
+      ctaOrderNow: 'Commander maintenant',
+      ctaSeeExamples: 'Voir des exemples',
+      askOnWhatsApp: 'Demander sur WhatsApp',
+      notConfiguredWhatsApp: '+216 XX XXX XXX',
+      whatsapp: 'WhatsApp',
+      copyright: '© {year} عيادي. Tous droits réservés.',
+    },
+    nav: {
+      home: 'Accueil',
+      howItWorks: 'Comment ça marche',
+      examples: 'Exemples',
+      pricing: 'Tarifs',
+      order: 'Commander',
+    },
+    hero: {
+      badge: 'Collection Aid 1447 - عيادي',
+      title: 'Créez un T-shirt Aid personnalisé pour votre enfant',
+      subtitle:
+        'Envoyez la photo de votre enfant, choisissez un style, puis recevez un design IA festif avec mouton de l’Aid, prêt à être imprimé.',
+      note: 'Un service pensé pour les familles, fluide sur mobile et élégant sur desktop.',
+      visualBadge: 'Aperçu',
+      visualTitle: 'De la photo au T-shirt final',
+      visualSummary: 'Photo enfant + IA + mouton + impression T-shirt',
+      visualSteps: ['Photo enfant', 'IA créative', 'Mouton festif', 'Impression T-shirt'],
+      visualAria:
+        'Schéma visuel: photo enfant, création IA, mouton festif puis impression du T-shirt',
+      visualAsideAria: 'Aperçu du processus de création',
+    },
+    howItWorks: {
+      badge: 'Comment ça marche',
+      title: 'Quatre étapes simples pour commander',
+      subtitle: 'Un parcours clair, rapide et rassurant pour les parents.',
+      steps: [
+        {
+          title: 'Upload photo',
+          description: 'Ajoutez une photo claire de votre enfant depuis le formulaire.',
+        },
+        {
+          title: 'Choisissez le style',
+          description: 'Sélectionnez Chibi ou Cartoon.',
+        },
+        {
+          title: 'Nous créons le design IA',
+          description: 'Notre équipe prépare un visuel personnalisé avec le mouton de l’Aid.',
+        },
+        {
+          title: 'Nous imprimons et livrons',
+          description: 'Après validation, nous imprimons le T-shirt puis préparons la livraison.',
+        },
+      ],
+    },
+    styles: {
+      badge: 'Exemples',
+      title: 'Exemples de styles',
+      subtitle: 'Choisissez entre deux styles clairs, pensés pour les enfants.',
+      previewLabel: 'Aperçu du style',
+      cards: [
+        {
+          title: 'Chibi',
+          description: 'Un style mignon, fun et enfantin avec un personnage adorable.',
+        },
+        {
+          title: 'Cartoon',
+          description: 'Un rendu cartoon propre et joyeux, parfait pour un T-shirt Aid.',
+        },
+      ],
+      cardAria: 'Aperçu visuel du style {style}',
+    },
+    pricing: {
+      badge: 'Tarifs',
+      title: 'Tarifs',
+      subtitle: 'Des packs simples pour un seul enfant',
+      description:
+        'Choisissez 1 ou 2 T-shirts personnalisés avec le même design IA de votre enfant avec خروف العيد.',
+      popular: 'Meilleure offre',
+      choosePack: 'Choisir ce pack',
+      packs: [
+        {
+          name: 'Pack 1 T-shirt',
+          price: '40 DT',
+          benefits: [
+            '1 design IA personnalisé',
+            '1 T-shirt enfant imprimé',
+            'Photo de votre enfant avec خروف العيد',
+            'Validation visuelle avant impression',
+          ],
+        },
+        {
+          name: 'Pack 2 T-shirts',
+          price: '70 DT',
+          benefits: [
+            'Même design IA personnalisé',
+            '2 T-shirts enfant imprimés',
+            'Idéal pour garder un T-shirt de rechange',
+            'Économie de 10 DT',
+          ],
+          featured: true,
+        },
+      ],
+    },
+    whyChooseUs: {
+      badge: 'Pourquoi nous choisir',
+      title: 'Une expérience de confiance pour les parents',
+      subtitle: 'Notre mission: offrir un souvenir Aid beau, sûr et durable.',
+      items: [
+        {
+          title: 'Design personnalisé',
+          description: 'Chaque visuel est adapté à la photo et au style sélectionné.',
+        },
+        {
+          title: 'Impression de qualité',
+          description: 'Supports confortables et impression nette qui dure dans le temps.',
+        },
+        {
+          title: 'Confidentialité respectée',
+          description: 'Les photos des enfants sont traitées avec discrétion et sécurité.',
+        },
+      ],
+    },
+    privacy: {
+      badge: 'Confidentialité',
+      title: 'Confidentialité des photos d’enfants',
+      text1:
+        'La photo de votre enfant est utilisée uniquement pour créer le design personnalisé de votre commande.',
+      text2:
+        'Aucune photo n’est publiée ni partagée sans votre autorisation explicite.',
+    },
+    form: {
+      badge: 'Commande personnalisée',
+      title: 'Commander votre T-shirt personnalisé',
+      subtitle:
+        'Remplissez ce formulaire pour lancer votre création Aid. Nous vous confirmons ensuite la commande.',
+      labels: {
+        prenom: 'Prénom',
+        nom: 'Nom',
+        telephone: 'Téléphone',
+        adresse: 'Adresse de livraison',
+        enfant: 'Nom de l’enfant',
+        age: 'Âge de l’enfant',
+        taille: 'Taille du T-shirt',
+        couleur: 'Couleur du T-shirt',
+        pack: 'Pack',
+        style: 'Style IA',
+        message: 'Message pour le T-shirt',
+        photo: 'Photo de l’enfant',
+      },
+      placeholders: {
+        prenom: 'Ex: Amina',
+        nom: 'Ex: Ben Salah',
+        telephone: '+216 XX XXX XXX',
+        adresse: 'Rue, ville, code postal',
+        enfant: 'Ex: Adam',
+        age: 'Ex: 7 ans',
+        message: 'Ex: Écrire son prénom avec des étoiles dorées.',
+      },
+      selects: {
+        sizePlaceholder: 'Choisir une taille',
+        colorPlaceholder: 'Choisir une couleur',
+        packPlaceholder: 'Choisir un pack',
+        stylePlaceholder: 'Choisir un style',
+      },
+      options: {
+        sizes: ['2 ans', '4 ans', '6 ans', '8 ans', '10 ans', '12 ans', 'S', 'M', 'L', 'XL'],
+        colors: ['Blanc', 'Noir', 'Beige'],
+        packs: ['Pack 1 T-shirt - 40 DT', 'Pack 2 T-shirts - 70 DT'],
+        styles: ['Chibi', 'Cartoon'],
+      },
+      consent:
+        'J’autorise عيادي à utiliser la photo envoyée uniquement pour créer le design personnalisé de ma commande. La photo ne sera pas publiée sans mon autorisation.',
+      submit: 'Envoyer ma commande',
+      loading: 'Envoi de votre commande...',
+      success:
+        'Commande envoyée avec succès. Nous allons préparer votre aperçu IA et vous contacter sur WhatsApp.',
+      whatsappConfirm: 'Confirmer sur WhatsApp',
+      photoHelp: 'Formats acceptés: JPG, JPEG, PNG, WEBP - taille maximale 5 MB.',
+      photoPreviewTitle: 'Aperçu de la photo',
+      photoPreviewEmpty:
+        'Aucune image sélectionnée pour le moment. Ajoutez une photo claire pour voir l’aperçu ici.',
+      configErrorPrefix: 'Configuration incomplète. Ajoutez ces variables dans votre fichier .env :',
+      errors: {
+        required: 'Ce champ est obligatoire.',
+        consentRequired: 'Vous devez accepter l’autorisation photo avant d’envoyer la commande.',
+        photoRequired: 'Veuillez ajouter une photo.',
+        photoNotImage: 'Le fichier doit être une image.',
+        photoInvalidType: 'Formats acceptés: JPG, JPEG, PNG ou WEBP.',
+        photoTooLarge: 'La photo doit être inférieure à 5 MB.',
+        validation: 'Merci de corriger les champs en rouge avant de continuer.',
+        generic: 'Une erreur est survenue. Veuillez réessayer.',
+        cloudinary: 'Erreur lors de l’envoi de la photo. Veuillez réessayer.',
+        emailjs: 'Erreur lors de l’envoi de la commande. Veuillez réessayer.',
+      },
+      previewAria: 'Aperçu de la photo envoyée',
+      whatsappAria: 'Confirmer la commande sur WhatsApp',
+    },
+    whatsappMessage: {
+      intro: 'Bonjour, je veux confirmer ma commande عيادي 🐑👕',
+      nom: 'Nom',
+      prenom: 'Prénom',
+      telephone: 'Téléphone',
+      adresse: 'Adresse',
+      enfant: 'Nom enfant',
+      age: 'Âge',
+      taille: 'Taille T-shirt',
+      couleur: 'Couleur',
+      pack: 'Pack',
+      style: 'Style IA',
+      message: 'Message',
+      photo: 'Photo enfant',
+    },
+    footer: {
+      tagline: 'Des T-shirts Aid personnalisés pour transformer la fête en souvenir durable.',
+      linksTitle: 'Liens rapides',
+      contactTitle: 'Contact',
+      familyTitle: 'Pour les familles',
+      familyText:
+        'Expérience mobile-first, style premium et attention particulière à la sécurité des photos des enfants.',
+    },
+    floatingWhatsapp: {
+      label: 'Contacter عيادي sur WhatsApp',
+      text: 'WhatsApp',
+    },
+  },
+}
