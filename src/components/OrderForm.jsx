@@ -4,14 +4,25 @@ import { useLanguage } from '../i18n/LanguageContext'
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024
 const ALLOWED_IMAGE_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp']
+const FALLBACK_WHATSAPP_NUMBER = '21629850995'
 
-const envConfig = {
-  cloudinaryCloudName: String(import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || '').trim(),
-  cloudinaryUploadPreset: String(import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET || '').trim(),
-  emailjsServiceId: String(import.meta.env.VITE_EMAILJS_SERVICE_ID || '').trim(),
-  emailjsTemplateId: String(import.meta.env.VITE_EMAILJS_TEMPLATE_ID || '').trim(),
-  emailjsPublicKey: String(import.meta.env.VITE_EMAILJS_PUBLIC_KEY || '').trim(),
-  whatsappNumber: String(import.meta.env.VITE_WHATSAPP_NUMBER || '').replace(/\D/g, ''),
+const getEnvConfig = () => {
+  const cloudName = String(import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || '').trim()
+  const uploadPreset = String(import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET || '').trim()
+  const emailServiceId = String(import.meta.env.VITE_EMAILJS_SERVICE_ID || '').trim()
+  const emailTemplateId = String(import.meta.env.VITE_EMAILJS_TEMPLATE_ID || '').trim()
+  const emailPublicKey = String(import.meta.env.VITE_EMAILJS_PUBLIC_KEY || '').trim()
+  const normalizedWhatsAppNumber = String(import.meta.env.VITE_WHATSAPP_NUMBER || '').replace(/\D/g, '')
+  const whatsappNumber = normalizedWhatsAppNumber || FALLBACK_WHATSAPP_NUMBER
+
+  return {
+    cloudName,
+    uploadPreset,
+    emailServiceId,
+    emailTemplateId,
+    emailPublicKey,
+    whatsappNumber,
+  }
 }
 
 const initialFormState = {
@@ -41,11 +52,15 @@ const createErrorWithCode = (code) => {
   return error
 }
 
-const uploadImageToCloudinary = async (file) => {
-  const endpoint = `https://api.cloudinary.com/v1_1/${envConfig.cloudinaryCloudName}/image/upload`
+const uploadImageToCloudinary = async (file, config) => {
+  if (!config.cloudName || !config.uploadPreset) {
+    throw createErrorWithCode('submit_config')
+  }
+
+  const endpoint = `https://api.cloudinary.com/v1_1/${config.cloudName}/image/upload`
   const body = new FormData()
   body.append('file', file)
-  body.append('upload_preset', envConfig.cloudinaryUploadPreset)
+  body.append('upload_preset', config.uploadPreset)
 
   let response
   try {
@@ -92,6 +107,7 @@ const buildWhatsappMessage = (formData, photoUrl, t) =>
 
 function OrderForm() {
   const { t } = useLanguage()
+  const envConfig = useMemo(() => getEnvConfig(), [])
   const [formData, setFormData] = useState(initialFormState)
   const [errors, setErrors] = useState({})
   const [isLoading, setIsLoading] = useState(false)
@@ -103,23 +119,18 @@ function OrderForm() {
   const colorOptions = t('form.options.colors', [])
   const packOptions = t('form.options.packs', [])
   const styleOptions = t('form.options.styles', [])
-
-  const configErrorMessage = useMemo(() => {
-    const missing = []
-
-    if (!envConfig.cloudinaryCloudName) missing.push('VITE_CLOUDINARY_CLOUD_NAME')
-    if (!envConfig.cloudinaryUploadPreset) missing.push('VITE_CLOUDINARY_UPLOAD_PRESET')
-    if (!envConfig.emailjsServiceId) missing.push('VITE_EMAILJS_SERVICE_ID')
-    if (!envConfig.emailjsTemplateId) missing.push('VITE_EMAILJS_TEMPLATE_ID')
-    if (!envConfig.emailjsPublicKey) missing.push('VITE_EMAILJS_PUBLIC_KEY')
-    if (!envConfig.whatsappNumber) missing.push('VITE_WHATSAPP_NUMBER')
-
-    if (!missing.length) {
-      return ''
-    }
-
-    return `${t('form.configErrorPrefix')} ${missing.join(', ')}.`
-  }, [t])
+  const hasSubmitConfig = useMemo(
+    () =>
+      Boolean(
+        envConfig.cloudName &&
+          envConfig.uploadPreset &&
+          envConfig.emailServiceId &&
+          envConfig.emailTemplateId &&
+          envConfig.emailPublicKey,
+      ),
+    [envConfig],
+  )
+  const fallbackWhatsappHref = `https://wa.me/${envConfig.whatsappNumber}`
 
   useEffect(() => {
     return () => {
@@ -273,10 +284,10 @@ function OrderForm() {
     setStatus(initialStatus)
     setWhatsappUrl('')
 
-    if (configErrorMessage) {
+    if (!hasSubmitConfig) {
       setStatus({
         type: 'error',
-        message: configErrorMessage,
+        message: t('form.errors.submitFailedFriendly'),
       })
       return
     }
@@ -292,7 +303,7 @@ function OrderForm() {
     setIsLoading(true)
 
     try {
-      const photoUrl = await uploadImageToCloudinary(formData.photo)
+      const photoUrl = await uploadImageToCloudinary(formData.photo, envConfig)
       const orderDate = new Date().toLocaleString('fr-FR', {
         dateStyle: 'medium',
         timeStyle: 'short',
@@ -317,10 +328,10 @@ function OrderForm() {
 
       try {
         await emailjs.send(
-          envConfig.emailjsServiceId,
-          envConfig.emailjsTemplateId,
+          envConfig.emailServiceId,
+          envConfig.emailTemplateId,
           templateParams,
-          envConfig.emailjsPublicKey,
+          envConfig.emailPublicKey,
         )
       } catch {
         throw createErrorWithCode('emailjs_send')
@@ -346,7 +357,12 @@ function OrderForm() {
         return ''
       })
     } catch (error) {
-      if (error?.code === 'cloudinary_upload') {
+      if (error?.code === 'submit_config') {
+        setStatus({
+          type: 'error',
+          message: t('form.errors.submitFailedFriendly'),
+        })
+      } else if (error?.code === 'cloudinary_upload') {
         setStatus({
           type: 'error',
           message: t('form.errors.cloudinary'),
@@ -386,15 +402,6 @@ function OrderForm() {
           </div>
 
           <p className="section-subtitle mt-3 max-w-3xl">{t('form.subtitle')}</p>
-
-          {configErrorMessage && (
-            <div
-              className="mt-6 rounded-2xl border border-amber-300 bg-amber-50 px-4 py-3 text-sm text-amber-800 sm:text-base"
-              role="alert"
-            >
-              {configErrorMessage}
-            </div>
-          )}
 
           {status.type === 'success' && (
             <div
@@ -778,15 +785,15 @@ function OrderForm() {
               <button
                 type="submit"
                 className="ui-button-primary min-w-[230px] disabled:cursor-not-allowed disabled:opacity-75"
-                disabled={isLoading || Boolean(configErrorMessage)}
+                disabled={isLoading}
               >
                 {isLoading ? t('form.loading') : t('form.submit')}
               </button>
             </div>
           </form>
 
-          {status.type === 'success' && whatsappUrl && (
-            <div className="mt-5">
+          <div className="mt-5 flex flex-wrap items-center gap-3">
+            {status.type === 'success' && whatsappUrl && (
               <a
                 href={whatsappUrl}
                 target="_blank"
@@ -796,8 +803,18 @@ function OrderForm() {
               >
                 {t('form.whatsappConfirm')}
               </a>
-            </div>
-          )}
+            )}
+
+            <a
+              href={fallbackWhatsappHref}
+              target="_blank"
+              rel="noreferrer"
+              className="ui-button-secondary"
+              aria-label={t('form.contactWhatsappAria')}
+            >
+              {t('form.contactWhatsapp')}
+            </a>
+          </div>
         </div>
       </div>
     </section>

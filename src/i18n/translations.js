@@ -184,11 +184,11 @@ export const translations = {
       success:
         'طلبك تبعث بنجاح. باش نحضّرولك aperçu IA ونتصلو بيك على WhatsApp.',
       whatsappConfirm: 'أكّد على WhatsApp',
+      contactWhatsapp: 'تواصل معانا على WhatsApp',
       photoHelp: 'الأنواع المسموح بها: JPG, JPEG, PNG, WEBP - الحجم الأقصى 5 MB.',
       photoPreviewTitle: 'Aperçu التصويرة',
       photoPreviewEmpty:
         'ما اخترتش تصويرة بعد. حمّل تصويرة واضحة باش يظهرلك الـ aperçu هنا.',
-      configErrorPrefix: 'الإعدادات ناقصة. زيد المتغيّرات هاذم في .env:',
       errors: {
         required: 'الخانة هاذي لازمة.',
         consentRequired: 'لازمك توافق على استعمال التصويرة قبل الإرسال.',
@@ -198,11 +198,13 @@ export const translations = {
         photoTooLarge: 'حجم التصويرة لازم يكون أقل من 5 MB.',
         validation: 'ثبت الخانات لي فيها خطأ قبل ما تكمّل.',
         generic: 'صار مشكل. جرّب مرّة أخرى.',
+        submitFailedFriendly: 'صار مشكل في إرسال الطلبية. جرّب مرّة أخرى أو تواصل معانا على WhatsApp.',
         cloudinary: 'صار مشكل وقت بعث التصويرة. جرّب مرّة أخرى.',
         emailjs: 'صار مشكل وقت بعث الطلبية. جرّب مرّة أخرى.',
       },
       previewAria: 'Aperçu متاع التصويرة المرفوعة',
       whatsappAria: 'أكّد الطلبية على WhatsApp',
+      contactWhatsappAria: 'تواصل معانا على WhatsApp',
     },
     whatsappMessage: {
       intro: 'Bonjour, je veux confirmer ma commande عيادي 🐑👕',
@@ -417,11 +419,11 @@ export const translations = {
       success:
         'Commande envoyée avec succès. Nous allons préparer votre aperçu IA et vous contacter sur WhatsApp.',
       whatsappConfirm: 'Confirmer sur WhatsApp',
+      contactWhatsapp: 'Nous contacter sur WhatsApp',
       photoHelp: 'Formats acceptés: JPG, JPEG, PNG, WEBP - taille maximale 5 MB.',
       photoPreviewTitle: 'Aperçu de la photo',
       photoPreviewEmpty:
         'Aucune image sélectionnée pour le moment. Ajoutez une photo claire pour voir l’aperçu ici.',
-      configErrorPrefix: 'Configuration incomplète. Ajoutez ces variables dans votre fichier .env :',
       errors: {
         required: 'Ce champ est obligatoire.',
         consentRequired: 'Vous devez accepter l’autorisation photo avant d’envoyer la commande.',
@@ -431,11 +433,14 @@ export const translations = {
         photoTooLarge: 'La photo doit être inférieure à 5 MB.',
         validation: 'Merci de corriger les champs en rouge avant de continuer.',
         generic: 'Une erreur est survenue. Veuillez réessayer.',
+        submitFailedFriendly:
+          'Une erreur est survenue lors de l’envoi de la commande. Veuillez réessayer ou nous contacter sur WhatsApp.',
         cloudinary: 'Erreur lors de l’envoi de la photo. Veuillez réessayer.',
         emailjs: 'Erreur lors de l’envoi de la commande. Veuillez réessayer.',
       },
       previewAria: 'Aperçu de la photo envoyée',
       whatsappAria: 'Confirmer la commande sur WhatsApp',
+      contactWhatsappAria: 'Nous contacter sur WhatsApp',
     },
     whatsappMessage: {
       intro: 'Bonjour, je veux confirmer ma commande عيادي 🐑👕',
