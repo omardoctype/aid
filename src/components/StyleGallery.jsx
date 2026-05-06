@@ -1,3 +1,4 @@
+import { useMemo } from 'react'
 import { useLanguage } from '../i18n/LanguageContext'
 import cartoonStyleImage from '../assets/cartoon.png'
 import chibiStyleImage from '../assets/chiibi.png'
@@ -9,7 +10,10 @@ const resolveStyleImage = (styleTitle) => {
 
 function StyleGallery() {
   const { t } = useLanguage()
-  const cards = t('styles.cards', [])
+  const cards = useMemo(() => {
+    const translatedCards = t('styles.cards', [])
+    return Array.isArray(translatedCards) ? translatedCards : []
+  }, [t])
 
   return (
     <section id="exemples" className="section-space scroll-mt-28" aria-labelledby="style-gallery-title">

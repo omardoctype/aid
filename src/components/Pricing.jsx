@@ -1,8 +1,12 @@
+import { useMemo } from 'react'
 import { useLanguage } from '../i18n/LanguageContext'
 
 function Pricing() {
   const { t } = useLanguage()
-  const packs = t('pricing.packs', [])
+  const packs = useMemo(() => {
+    const translatedPacks = t('pricing.packs', [])
+    return Array.isArray(translatedPacks) ? translatedPacks : []
+  }, [t])
 
   return (
     <section id="tarifs" className="section-space scroll-mt-28" aria-labelledby="pricing-title">
@@ -32,7 +36,7 @@ function Pricing() {
               <p className="mt-4 text-4xl font-bold text-brand-dark-olive">{pack.price}</p>
 
               <ul className="mt-5 space-y-2 text-sm text-brand-brown sm:text-base">
-                {pack.benefits.map((benefit) => (
+                {(Array.isArray(pack.benefits) ? pack.benefits : []).map((benefit) => (
                   <li key={benefit} className="flex items-start gap-2">
                     <span className="mt-1 inline-block h-2 w-2 rounded-full bg-brand-olive" />
                     <span>{benefit}</span>

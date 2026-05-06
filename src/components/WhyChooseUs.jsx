@@ -1,8 +1,12 @@
+import { useMemo } from 'react'
 import { useLanguage } from '../i18n/LanguageContext'
 
 function WhyChooseUs() {
   const { t } = useLanguage()
-  const items = t('whyChooseUs.items', [])
+  const items = useMemo(() => {
+    const translatedItems = t('whyChooseUs.items', [])
+    return Array.isArray(translatedItems) ? translatedItems : []
+  }, [t])
 
   return (
     <section id="confiance" className="section-space scroll-mt-28" aria-labelledby="why-choose-title">

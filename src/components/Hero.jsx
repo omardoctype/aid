@@ -1,9 +1,13 @@
+import { useMemo } from 'react'
 import { useLanguage } from '../i18n/LanguageContext'
 import BrandLogo from './BrandLogo'
 
 function Hero() {
   const { t } = useLanguage()
-  const visualSteps = t('hero.visualSteps', [])
+  const visualSteps = useMemo(() => {
+    const translatedSteps = t('hero.visualSteps', [])
+    return Array.isArray(translatedSteps) ? translatedSteps : []
+  }, [t])
 
   return (
     <section id="accueil" className="section-space scroll-mt-28 overflow-hidden">

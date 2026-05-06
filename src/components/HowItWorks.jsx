@@ -1,8 +1,12 @@
+import { useMemo } from 'react'
 import { useLanguage } from '../i18n/LanguageContext'
 
 function HowItWorks() {
   const { t } = useLanguage()
-  const steps = t('howItWorks.steps', [])
+  const steps = useMemo(() => {
+    const translatedSteps = t('howItWorks.steps', [])
+    return Array.isArray(translatedSteps) ? translatedSteps : []
+  }, [t])
 
   return (
     <section

@@ -52,6 +52,18 @@ const createErrorWithCode = (code) => {
   return error
 }
 
+const safeRevokeObjectUrl = (url) => {
+  if (!url) {
+    return
+  }
+
+  try {
+    URL.revokeObjectURL(url)
+  } catch {
+    // Ignore stale/revoked URLs.
+  }
+}
+
 const uploadImageToCloudinary = async (file, config) => {
   if (!config.cloudName || !config.uploadPreset) {
     throw createErrorWithCode('submit_config')
@@ -106,19 +118,32 @@ const buildWhatsappMessage = (formData, photoUrl, t) =>
   ].join('\n')
 
 function OrderForm() {
-  const { t } = useLanguage()
+  const { language, t } = useLanguage()
   const envConfig = useMemo(() => getEnvConfig(), [])
   const [formData, setFormData] = useState(initialFormState)
   const [errors, setErrors] = useState({})
   const [isLoading, setIsLoading] = useState(false)
   const [status, setStatus] = useState(initialStatus)
   const [previewUrl, setPreviewUrl] = useState('')
+  const [previewLoadError, setPreviewLoadError] = useState(false)
   const [whatsappUrl, setWhatsappUrl] = useState('')
 
-  const sizeOptions = t('form.options.sizes', [])
-  const colorOptions = t('form.options.colors', [])
-  const packOptions = t('form.options.packs', [])
-  const styleOptions = t('form.options.styles', [])
+  const sizeOptions = useMemo(() => {
+    const options = t('form.options.sizes', [])
+    return Array.isArray(options) ? options : []
+  }, [t])
+  const colorOptions = useMemo(() => {
+    const options = t('form.options.colors', [])
+    return Array.isArray(options) ? options : []
+  }, [t])
+  const packOptions = useMemo(() => {
+    const options = t('form.options.packs', [])
+    return Array.isArray(options) ? options : []
+  }, [t])
+  const styleOptions = useMemo(() => {
+    const options = t('form.options.styles', [])
+    return Array.isArray(options) ? options : []
+  }, [t])
   const hasSubmitConfig = useMemo(
     () =>
       Boolean(
@@ -131,14 +156,41 @@ function OrderForm() {
     [envConfig],
   )
   const fallbackWhatsappHref = `https://wa.me/${envConfig.whatsappNumber}`
+  const genericSubmitErrorMessage = t(
+    'form.errors.submitFailedFriendly',
+    language === 'ar'
+      ? 'صار مشكل في إرسال الطلبية. جرّب مرّة أخرى أو تواصل معانا على WhatsApp.'
+      : 'Une erreur est survenue lors de l’envoi de la commande. Veuillez réessayer ou nous contacter sur WhatsApp.',
+  )
+  const previewLoadErrorMessage = t(
+    'form.previewLoadError',
+    language === 'ar'
+      ? 'ما قدرناش نعرضو apercu التصويرة. تنجم تبدّلها بصورة أخرى.'
+      : "Impossible d'afficher l'aperçu de l'image. Vous pouvez en choisir une autre.",
+  )
 
   useEffect(() => {
     return () => {
-      if (previewUrl) {
-        URL.revokeObjectURL(previewUrl)
-      }
+      safeRevokeObjectUrl(previewUrl)
     }
   }, [previewUrl])
+
+  useEffect(() => {
+    const handlePageShow = (event) => {
+      if (!event.persisted) {
+        return
+      }
+
+      setIsLoading(false)
+      document.documentElement.style.overflow = ''
+      document.body.style.overflow = ''
+    }
+
+    window.addEventListener('pageshow', handlePageShow)
+    return () => {
+      window.removeEventListener('pageshow', handlePageShow)
+    }
+  }, [])
 
   const photoDetails = useMemo(() => {
     if (!formData.photo) {
@@ -153,6 +205,16 @@ function OrderForm() {
 
   const validatePhoto = (file) => {
     if (!file) {
+      return t('form.errors.photoRequired')
+    }
+
+    const isFileLike =
+      typeof file === 'object' &&
+      file !== null &&
+      typeof file.type === 'string' &&
+      typeof file.size === 'number'
+
+    if (!isFileLike) {
       return t('form.errors.photoRequired')
     }
 
@@ -234,6 +296,7 @@ function OrderForm() {
   const handlePhotoChange = (event) => {
     const selectedFile = event.target.files?.[0] || null
     const photoError = validatePhoto(selectedFile)
+    setPreviewLoadError(false)
 
     setFormData((previous) => ({
       ...previous,
@@ -246,15 +309,21 @@ function OrderForm() {
     }))
 
     setPreviewUrl((previous) => {
-      if (previous) {
-        URL.revokeObjectURL(previous)
-      }
+      safeRevokeObjectUrl(previous)
 
       if (photoError || !selectedFile) {
         return ''
       }
 
-      return URL.createObjectURL(selectedFile)
+      try {
+        return URL.createObjectURL(selectedFile)
+      } catch {
+        setStatus({
+          type: 'error',
+          message: t('form.errors.generic'),
+        })
+        return ''
+      }
     })
 
     if (photoError) {
@@ -271,6 +340,14 @@ function OrderForm() {
 
   const handleBlur = (event) => {
     const { name, type, checked, value } = event.target
+    if (name === 'photo') {
+      setErrors((previous) => ({
+        ...previous,
+        photo: validateField('photo', formData.photo),
+      }))
+      return
+    }
+
     const currentValue = type === 'checkbox' ? checked : value
 
     setErrors((previous) => ({
@@ -287,7 +364,7 @@ function OrderForm() {
     if (!hasSubmitConfig) {
       setStatus({
         type: 'error',
-        message: t('form.errors.submitFailedFriendly'),
+        message: genericSubmitErrorMessage,
       })
       return
     }
@@ -351,16 +428,15 @@ function OrderForm() {
       setErrors({})
 
       setPreviewUrl((previous) => {
-        if (previous) {
-          URL.revokeObjectURL(previous)
-        }
+        safeRevokeObjectUrl(previous)
         return ''
       })
+      setPreviewLoadError(false)
     } catch (error) {
       if (error?.code === 'submit_config') {
         setStatus({
           type: 'error',
-          message: t('form.errors.submitFailedFriendly'),
+          message: genericSubmitErrorMessage,
         })
       } else if (error?.code === 'cloudinary_upload') {
         setStatus({
@@ -747,8 +823,14 @@ function OrderForm() {
                     <img
                       src={previewUrl}
                       alt={t('form.previewAria')}
-                      className="mt-3 h-56 w-full rounded-2xl object-cover sm:h-64"
+                      className="mt-3 max-h-64 w-full rounded-2xl object-cover"
+                      onError={() => setPreviewLoadError(true)}
                     />
+                    {previewLoadError && (
+                      <div className="mt-3 rounded-2xl border border-brand-olive/25 bg-brand-cream/70 px-4 py-4 text-sm text-brand-brown">
+                        {previewLoadErrorMessage}
+                      </div>
+                    )}
                   </>
                 ) : (
                   <div className="mt-3 rounded-2xl border border-dashed border-brand-olive/30 bg-brand-cream/60 px-4 py-6 text-sm text-brand-brown sm:text-base">

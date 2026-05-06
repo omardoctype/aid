@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useLanguage } from '../i18n/LanguageContext'
 import BrandLogo from './BrandLogo'
 
@@ -18,6 +18,36 @@ const languages = [
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const { language, setLanguage, t } = useLanguage()
+
+  useEffect(() => {
+    const closeMenu = () => setIsMenuOpen(false)
+    const desktopMediaQuery = window.matchMedia('(min-width: 1024px)')
+    const handleDesktopLayout = (event) => {
+      if (event.matches) {
+        closeMenu()
+      }
+    }
+
+    window.addEventListener('hashchange', closeMenu)
+    window.addEventListener('pageshow', closeMenu)
+
+    if (desktopMediaQuery.addEventListener) {
+      desktopMediaQuery.addEventListener('change', handleDesktopLayout)
+    } else {
+      desktopMediaQuery.addListener(handleDesktopLayout)
+    }
+
+    return () => {
+      window.removeEventListener('hashchange', closeMenu)
+      window.removeEventListener('pageshow', closeMenu)
+
+      if (desktopMediaQuery.removeEventListener) {
+        desktopMediaQuery.removeEventListener('change', handleDesktopLayout)
+      } else {
+        desktopMediaQuery.removeListener(handleDesktopLayout)
+      }
+    }
+  }, [])
 
   const handleNavClick = () => {
     setIsMenuOpen(false)
@@ -146,3 +176,4 @@ function Header() {
 }
 
 export default Header
+
