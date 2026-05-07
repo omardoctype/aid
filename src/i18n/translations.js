@@ -173,7 +173,7 @@ export const translations = {
       },
       options: {
         sizes: ['2 ans', '4 ans', '6 ans', '8 ans', '10 ans', '12 ans', 'S', 'M', 'L', 'XL'],
-        colors: ['أبيض', 'أسود', 'بيج'],
+        colors: ['أبيض', 'أسود', 'أزرق', 'وردي'],
         packs: ['Pack T-shirt واحد - 40 د.ت', 'Pack زوج T-shirts - 70 د.ت'],
         styles: ['Chibi', 'Cartoon'],
       },
@@ -402,13 +402,13 @@ export const translations = {
       },
       selects: {
         sizePlaceholder: 'Choisir une taille',
-        colorPlaceholder: 'Choisir une couleur',
+        colorPlaceholder: 'Choisir la couleur',
         packPlaceholder: 'Choisir un pack',
         stylePlaceholder: 'Choisir un style',
       },
       options: {
         sizes: ['2 ans', '4 ans', '6 ans', '8 ans', '10 ans', '12 ans', 'S', 'M', 'L', 'XL'],
-        colors: ['Blanc', 'Noir', 'Beige'],
+        colors: ['Blanc', 'Noir', 'Bleu', 'Rose'],
         packs: ['Pack 1 T-shirt - 40 DT', 'Pack 2 T-shirts - 70 DT'],
         styles: ['Chibi', 'Cartoon'],
       },
